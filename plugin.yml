@@ -1,0 +1,13 @@
+main: me.iamguus.galaxacore.Core
+name: GalaxaCore
+version: 1.0
+author: iAmGuus
+commands:
+  spawn:
+    description: Teleport to spawn!
+
+  setspawn:
+    description: Set spawn location.
+
+  booster:
+    description: See your boosters!

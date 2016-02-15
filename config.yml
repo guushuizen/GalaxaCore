@@ -1,0 +1,26 @@
+joinleave:
+  permission: galaxacraft.joinleave-full
+  kick-message: "You can't enter this server because it's full!\nPlease try again later!"
+
+joinleavemessage:
+  permission: galaxacraft.joinleave-message
+  join-message: "%player% &ejoined the server!"
+  quit-message: "%player% &eleft the server!"
+
+chat-delay:
+  permission: galaxacraft.chat-delay
+  delay: 3
+  message: "&4You can only send a message every 3 seconds!"
+
+spawn:
+  enabled: false
+  location:
+
+chat-format: "%DISPLAYNAME%&7: &f%MESSAGE%"
+
+mysql:
+  ip: 127.0.0.1
+  port: 3306
+  username: root
+  password: password
+  database: minecraft
