@@ -20,8 +20,8 @@ public class EconomyUtil {
         try {
             PreparedStatement ps = MySQLHandler.get().getConnection().prepareStatement("INSERT IGNORE INTO players (uuid, orbs, coins, boosters) VALUES(?, ?, ?, ?);");
             ps.setString(1, player.getUniqueId().toString());
-            ps.setString(2, "");
-            ps.setInt(3, 0);
+            ps.setInt(2, 0);
+            ps.setString(3, "");
             ps.setString(4, "");
 
             ps.executeUpdate();
@@ -39,6 +39,8 @@ public class EconomyUtil {
             ps.setString(1, uuid.toString());
 
             ResultSet rs = ps.executeQuery();
+
+            rs.next();
 
             String coinString = rs.getString("coins");
 
@@ -64,7 +66,7 @@ public class EconomyUtil {
     }
 
     public int getCoins(UUID uuid, GameType type) {
-        return getCoins(uuid).get(type);
+        return (getCoins(uuid).get(type) != null) ? getCoins(uuid).get(type) : 0;
     }
 
     public void setCoins(UUID uuid, GameType type, int coins) {
@@ -104,6 +106,8 @@ public class EconomyUtil {
 
             ResultSet rs = ps.executeQuery();
 
+            rs.next();
+
             int coins = rs.getInt("orbs");
 
             ps.close();
@@ -122,7 +126,7 @@ public class EconomyUtil {
             ps.setInt(1, coins);
             ps.setString(2, uuid.toString());
         } catch (SQLException ex) {
-
+            ex.printStackTrace();
         }
     }
 

@@ -46,8 +46,10 @@ public class CoreListener implements Listener {
             event.setJoinMessage(ChatColor.translateAlternateColorCodes('&', ConfigUtil.get().getConfig().getString("joinleavemessage.join-message").replaceAll("%player%", player.getDisplayName())));
         }
 
-        Location teleportTo = LocationUtil.get().deserialize(ConfigUtil.get().getConfig().getString("spawn.location"));
-        player.teleport(teleportTo);
+        if (ConfigUtil.get().getConfig().getBoolean("tp-to-spawn")) {
+            Location teleportTo = LocationUtil.get().deserialize(ConfigUtil.get().getConfig().getString("spawn.location"));
+            event.getPlayer().teleport(teleportTo);
+        }
 
         EconomyUtil.get().createRowForPlayer(player);
     }
@@ -93,9 +95,11 @@ public class CoreListener implements Listener {
 
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        if (event.getTo().getY() <= 0) {
-            Location teleportTo = LocationUtil.get().deserialize(ConfigUtil.get().getConfig().getString("spawn.location"));
-            event.getPlayer().teleport(teleportTo);
+        if (ConfigUtil.get().getConfig().getBoolean("tp-to-spawn")) {
+            if (event.getTo().getY() <= 0) {
+                Location teleportTo = LocationUtil.get().deserialize(ConfigUtil.get().getConfig().getString("spawn.location"));
+                event.getPlayer().teleport(teleportTo);
+            }
         }
     }
 }
